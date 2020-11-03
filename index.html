@@ -1,0 +1,106 @@
+<html>
+
+<head>
+    <title>Index</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <script src="js/js1.js"></script>
+    <style>
+        style.css .label {
+            float: left;
+            width: 120px;
+        }
+
+        .infobox {
+            width: 120px;
+        }
+
+        .error {
+            color: red;
+            padding-left: 10px;
+        }
+
+        .submit {
+            margin-left: 125px;
+            margin-top: 10px;
+        }
+
+        div {
+            padding: 5px;
+        }
+
+        .chkb {
+            margin-left: 125px;
+            margin-top: 10px;
+        }
+
+        .radiobtn {
+            margin-left: 125px;
+            margin-top: 10px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <form>
+        <div> <span class="label">User Id </span><input type="text" class="userid" name="userid" />
+            <span
+                class="error">User id can contain only numeral, character or
+                _(underscore)</span>
+            </div>
+
+        <div><span class="label">Password </span><input type="password" class="password" name="password" />
+            <span
+                class="error"> Password cannot be blank</span>
+            </div>
+
+        <div><span class="label">Email Address </span><input type="text" class="emailadd" name="emailid" />
+            <span
+                class="error"> Invalid email address</span>
+            </div>
+
+        <div><span class="label">Select Food items</span><br><input type="checkbox" id="pizza" name="pizza" value=5
+                class="chkb">Pizza $5 <br>
+
+            <input type="checkbox" id="hotdog" name="hotdog" value=2 class="chkb">HotDog $2<br>
+            <input type="checkbox" id="coke" name="coke" value=1 class="chkb">Coke $1<br>
+            <input type="checkbox" id="fries" name="fries" value=3 class="chkb">French Fries $3<br>
+
+            <span class="fooderror">You have not selected any food item</span>
+
+        </div>
+
+        <div><span class="label">Mode of Payment</span><br>
+            <input type="radio" name="paymode" class="radiobtn"
+                value="MasterCard">MasterCard <br>
+
+            <input type="radio" name="paymode" class="radiobtn" value="ANZ Grindlay Card">ANZ Grindlay
+            Card<br>
+            <input type="radio" name="paymode" class="radiobtn" value="Visa Card">Visa Card<br>
+
+            <span class="payerror">You have not selected any payment method</span>
+
+        </div>
+
+        <div><span class="label">Country</span><select id="country" class="infobox">
+                <option value="0">Select a Country</option>
+                <option value="USA">USA</option>
+                <option value="United Kingdom">United Kingdom</option>
+                <option value="India">India</option>
+                <option value="China">China</option>
+            </select>
+
+            <span class="error"> Please select the country</span>
+        
+        </div>
+
+        <input class="submit" type="submit" value="Submit">
+
+    </form>
+</body>
+
+</html>
