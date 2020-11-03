@@ -1,0 +1,199 @@
+<html>
+
+<head>
+    <title>Index</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <script>
+        $(document).ready(function () {
+    $('.error').hide();
+    $('.carerror').addClass('error');
+    $('.carerror').hide();
+    $('.payerror').addClass('error');
+    $('.payerror').hide();
+   
+
+    $('.submit').click(function (event) {
+        var data = $('.userid').val();
+        if (validate_userid(data)) {
+            $('.userid').next().hide(); 
+        } // Hide the error message for userID
+        else {
+            $('.userid').next().show();
+        } // Show error message for userID
+
+        data = $('.password').val();
+        var len = data.length;
+        if (len < 1) {
+            $('.password').next().show(); 
+        } // Hide the error message for password
+        else {
+            $('.password').next().hide();
+        }  // Show the error message for password
+
+        data = $('.emailadd').val();
+        if (valid_email(data)) {
+            $('.emailadd').next().hide();
+        } // Hide the error message for Email
+        else {
+            $('.emailadd').next().show();
+        } // Show the error message for Email
+
+        var count = 0;
+        $('div').find(':checkbox').each(function () {
+            if ($(this).is(':checked')) {
+                count++;
+            }  
+        }); // Check if user already selected Car model or not
+        if (count == 0) {
+            $('.carerror').css({ 'margin-left': 250 }).show();
+        } // Show the error message for Car model Selection
+        else {
+            $('.carerror').hide();
+        } // Hide the error message for Car model Selection
+
+        count = 0;
+        $('div').find(':radio').each(function () {
+            if ($(this).is(':checked')) {
+                count++;
+            }
+        }); // Check if the user already selected a payment selection or not
+        if (count == 0) {
+            $('.payerror').css({ 'margin-left': 250 }).show();
+        } // Show the error message for Payment Selection
+        else {
+            $('.payerror').hide();
+        } // Hide the error message for Payment Selection
+
+        count = $('select option:selected').val();
+        if (count == 0) {
+            $('.infobox').next().show();
+        } // Show the error message for Region Selection
+        else {
+            $('.infobox').next().hide();
+        } // Hide the error message for Region Selection
+
+        event.preventDefault();
+    });
+    event.preventDefault();
+});
+
+
+function valid_email(email) {
+    var pattern = new RegExp(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]+$/);
+    return pattern.test(email);
+} // To validate if the email is proper Email form or not. It must atleast contain at (@) and dot (.) for the domain
+
+function validate_userid(uid) {
+    var pattern = new RegExp(/^[a-z0-9_]+$/);
+    return pattern.test(uid);
+} // To validate if the username is allowed form or not. It can only use character (a-z), numeral (0-9) and underscore (_)
+    </script>
+    <style>
+        style.css .label {
+            float: left;
+            width: 120px;
+        }
+
+        .infobox {
+            width: 120px;
+        }
+
+        .error {
+            color: red;
+            padding-left: 10px;
+        }
+
+        .submit {
+            margin-left: 125px;
+            margin-top: 10px;
+        }
+
+        div {
+            padding: 5px;
+        }
+
+        .chkb {
+            margin-left: 125px;
+            margin-top: 10px;
+        }
+
+        .radiobtn {
+            margin-left: 125px;
+            margin-top: 10px;
+        } 
+    </style>
+
+
+</head>
+
+<body>
+    <form>
+        <div> <span class="label">User Id </span><input type="text" class="userid" name="userid" /> <!-- user ID  -->
+            <span
+                class="error">User id can contain only numeral, character or
+                _(underscore)</span> <!-- Error message for user ID -->
+            </div> 
+
+        <div><span class="label">Password </span><input type="password" class="password" name="password" /> <!-- Password -->
+            <span
+                class="error"> Password cannot be blank</span>
+            </div> <!-- Error message for password -->
+
+        <div><span class="label">Email Address </span><input type="text" class="emailadd" name="emailid" /><!-- Email -->
+            <span
+                class="error"> Invalid email address</span>
+            </div><!-- Error message for email -->
+
+        <div><span class="label">Select Tesla Car Model</span><br> <!-- Car Selection -->
+            
+            <!-- Car list -->
+            <input type="checkbox" id="Model_S" name="Model_S" value=5 class="chkb">Model S $1000 <br> 
+            <input type="checkbox" id="Model_M" name="Model_M" value=2 class="chkb">Model M $950<br>
+            <input type="checkbox" id="Model_X" name="Model_X" value=1 class="chkb">Model X $900<br>
+            <input type="checkbox" id="Model_3" name="Model_3" value=3 class="chkb">Model 3 $500<br>
+
+            <!-- Error message for Car Selection -->
+            <span class="carerror">You have not selected any Tesla Car model</span>
+
+        </div>
+
+        <div><span class="label">Mode of Payment</span><br> <!-- Payment Selection -->
+            
+            <!-- Payment list -->
+            <input type="radio" name="paymode" class="radiobtn" value="Debit">Debit <br>
+            <input type="radio" name="paymode" class="radiobtn" value="Credit Card">Credit Card<br>
+            <input type="radio" name="paymode" class="radiobtn" value="COD">COD<br>
+
+            <!-- Error message for Payment Selection -->
+            <span class="payerror">You have not selected any payment method</span>
+
+        </div>
+
+        <div><span class="label">Region for shipment</span><select id="country" class="infobox"> <!-- Country Selection -->
+
+            <!-- Default Country Selection -->
+                <option value="0">Select your Region</option>
+
+            <!-- Country list -->   
+                <option value="USA">USA</option>
+                <option value="United Kingdom">United Kingdom</option>
+                <option value="Europe">Europe</option>
+                
+                
+            </select>
+
+            <!-- Error message for Country selection -->
+            <span class="error"> Please select your Region</span>
+        
+        </div>
+
+        <!-- Submit Button -->
+        <input class="submit" type="submit" value="Submit">
+
+    </form>
+</body>
+
+</html>
