@@ -6,7 +6,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
-    <script src="js/js1.js"></script>
+    <script>
+        $(document).ready(function () {
+    $('.error').hide();
+    $('.fooderror').addClass('error');
+    $('.fooderror').hide();
+    $('.payerror').addClass('error');
+    $('.payerror').hide();
+   
+
+    $('.submit').click(function (event) {
+        var data = $('.userid').val();
+        if (validate_userid(data)) {
+            $('.userid').next().hide(); 
+        } // Hide the error message for userID
+        else {
+            $('.userid').next().show();
+        } // Show error message for userID
+
+        data = $('.password').val();
+        var len = data.length;
+        if (len < 1) {
+            $('.password').next().show(); 
+        } // Hide the error message for password
+        else {
+            $('.password').next().hide();
+        }  // Show the error message for password
+
+        data = $('.emailadd').val();
+        if (valid_email(data)) {
+            $('.emailadd').next().hide();
+        } // Hide the error message for Email
+        else {
+            $('.emailadd').next().show();
+        } // Show the error message for Email
+
+        var count = 0;
+        $('div').find(':checkbox').each(function () {
+            if ($(this).is(':checked')) {
+                count++;
+            }  
+        }); // Check if user already selected food or not
+        if (count == 0) {
+            $('.fooderror').css({ 'margin-left': 250 }).show();
+        } // Show the error message for Food Selection
+        else {
+            $('.fooderror').hide();
+        } // Hide the error message for Food selection
+
+        count = 0;
+        $('div').find(':radio').each(function () {
+            if ($(this).is(':checked')) {
+                count++;
+            }
+        }); // Check if the user already selected a payment selection or not
+        if (count == 0) {
+            $('.payerror').css({ 'margin-left': 250 }).show();
+        } // Show the error message for Payment Selection
+        else {
+            $('.payerror').hide();
+        } // Hide the error message for Payment Selection
+
+        count = $('select option:selected').val();
+        if (count == 0) {
+            $('.infobox').next().show();
+        } // Show the error message for Country Selection
+        else {
+            $('.infobox').next().hide();
+        } // Hide the error message for Country Selection
+
+        event.preventDefault();
+    });
+    event.preventDefault();
+});
+
+
+function valid_email(email) {
+    var pattern = new RegExp(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]+$/);
+    return pattern.test(email);
+} // To validate if the email is proper Email form or not. It must atleast contain at (@) and dot (.) for the domain
+
+function validate_userid(uid) {
+    var pattern = new RegExp(/^[a-z0-9_]+$/);
+    return pattern.test(uid);
+} // To validate if the username is allowed form or not. It can only use character (a-z), numeral (0-9) and underscore (_)
+    </script>
     <style>
         style.css .label {
             float: left;
@@ -39,7 +123,7 @@
         .radiobtn {
             margin-left: 125px;
             margin-top: 10px;
-        }
+        } 
     </style>
 
 
@@ -47,57 +131,66 @@
 
 <body>
     <form>
-        <div> <span class="label">User Id </span><input type="text" class="userid" name="userid" />
+        <div> <span class="label">User Id </span><input type="text" class="userid" name="userid" /> <!-- user ID  -->
             <span
                 class="error">User id can contain only numeral, character or
-                _(underscore)</span>
-            </div>
+                _(underscore)</span> <!-- Error message for user ID -->
+            </div> 
 
-        <div><span class="label">Password </span><input type="password" class="password" name="password" />
+        <div><span class="label">Password </span><input type="password" class="password" name="password" /> <!-- Password -->
             <span
                 class="error"> Password cannot be blank</span>
-            </div>
+            </div> <!-- Error message for password -->
 
-        <div><span class="label">Email Address </span><input type="text" class="emailadd" name="emailid" />
+        <div><span class="label">Email Address </span><input type="text" class="emailadd" name="emailid" /><!-- Email -->
             <span
                 class="error"> Invalid email address</span>
-            </div>
+            </div><!-- Error message for email -->
 
-        <div><span class="label">Select Food items</span><br><input type="checkbox" id="pizza" name="pizza" value=5
-                class="chkb">Pizza $5 <br>
-
+        <div><span class="label">Select Food items</span><br> <!-- Food Selection -->
+            
+            <!-- Food list -->
+            <input type="checkbox" id="pizza" name="pizza" value=5 class="chkb">Pizza $5 <br> 
             <input type="checkbox" id="hotdog" name="hotdog" value=2 class="chkb">HotDog $2<br>
             <input type="checkbox" id="coke" name="coke" value=1 class="chkb">Coke $1<br>
             <input type="checkbox" id="fries" name="fries" value=3 class="chkb">French Fries $3<br>
 
+            <!-- Error message for Food Selection -->
             <span class="fooderror">You have not selected any food item</span>
 
         </div>
 
-        <div><span class="label">Mode of Payment</span><br>
-            <input type="radio" name="paymode" class="radiobtn"
-                value="MasterCard">MasterCard <br>
-
-            <input type="radio" name="paymode" class="radiobtn" value="ANZ Grindlay Card">ANZ Grindlay
-            Card<br>
+        <div><span class="label">Mode of Payment</span><br> <!-- Payment Selection -->
+            
+            <!-- Payment list -->
+            <input type="radio" name="paymode" class="radiobtn" value="MasterCard">MasterCard <br>
+            <input type="radio" name="paymode" class="radiobtn" value="ANZ Grindlay Card">ANZ Grindlay Card<br>
             <input type="radio" name="paymode" class="radiobtn" value="Visa Card">Visa Card<br>
 
+            <!-- Error message for Payment Selection -->
             <span class="payerror">You have not selected any payment method</span>
 
         </div>
 
-        <div><span class="label">Country</span><select id="country" class="infobox">
+        <div><span class="label">Country</span><select id="country" class="infobox"> <!-- Country Selection -->
+
+            <!-- Default Country Selection -->
                 <option value="0">Select a Country</option>
+
+            <!-- Country list -->   
                 <option value="USA">USA</option>
                 <option value="United Kingdom">United Kingdom</option>
                 <option value="India">India</option>
                 <option value="China">China</option>
+                
             </select>
 
+            <!-- Error message for Country selection -->
             <span class="error"> Please select the country</span>
         
         </div>
 
+        <!-- Submit Button -->
         <input class="submit" type="submit" value="Submit">
 
     </form>

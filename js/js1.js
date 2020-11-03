@@ -1,12 +1,12 @@
 
-
+//NOT USED
 $(document).ready(function () {
     $('.error').hide();
     $('.fooderror').addClass('error');
     $('.fooderror').hide();
     $('.payerror').addClass('error');
     $('.payerror').hide();
-    $.click()
+   
 
     $('.submit').click(function (event) {
         var data = $('.userid').val();
